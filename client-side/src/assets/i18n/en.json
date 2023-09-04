@@ -1,0 +1,89 @@
+{
+    "Ok": "Ok",
+    "DONE": "Done",
+    "CANCEL": "Cancel",
+    "Select_Label": "Select Label",
+    "Title_Addon": "Hello Addon",
+    "Title_Sub_Addon_3": "Hello Block 3",
+    "Open_Dialog": "Open Dialog",
+    "Dialog_Body": "Dialog from sub addon 3",
+    "Dialog_Title": "Dialog",
+
+    "GALLERY_EDITOR": {
+        "TABS":{
+            "GENERAL": "General",
+            "CONTENT": "Content"
+        },
+        "ITEM": "Item",
+        "INNER_SPACING": "Inner spacing",
+        "AWESOMETEXTFORTHE": "Awesome Text For The",
+        "GRID": "Grid",
+        "MAX_COLUMNS": "Max Columns",
+        "GAP_SUBHEADER": "Gap size between Gallery items",
+        "GAP_HEADER": "Gaps",
+        "GAP": "Gap (rem)",
+        "FILL_HEIGHT_SECTION_TITLE": "Fill Height",
+        "FILL_HEIGHT_SECTION_DESCRIPTION": "Set Fill Height on to make the slide to fill the section height",
+        "IMAGE_HEIGHT": "Height (rem)",
+        "GRID_EXPLANATION": "The grid is set by the amount of images uploaded and number of columns selected.",
+        "TEXT": "Text",
+        "CARD_COLOR": "Card Color",
+        "VERTICAL": "Vertical Position",
+        "VERTICAL_ALIGN":{
+            "TOP": "Top",
+            "MIDDLE": "Middle",
+            "BOTTOM": "Bottom"
+        },
+        "HORIZONTAL": "Content Align -> Horizontal",
+        "TEXT_POS_STYLING": "Text Position Styling",
+        "TITLE": "Title",
+        "TITLE_SIZE": "Title Size",
+        "TITLE_WEIGHT": "Title Weight",
+        "DESCRIPTION": "Description",
+        "GROUP_TITLE_DESCRIPTION": "Group Title and Description",
+        "DESCRIPTION_SIZE": "Text Size",
+        "MAX_NUM_OF_LINES": "Maximum number of lines",
+        "BORDER": "Border",
+        "BORDER_COLOR": "Border color",
+        "BORDER_OPACITY": "Border opacity",
+        "GRADIENT_OVERLAY": "Gradient overlay",
+        "GRADIENT_OVERLAY_COLOR": "Gradient overlay color",
+        "GRADIENT_OVERLAY_OPACITY": "Gradient overlay opacity",
+        "OVERLAY": "Overlay",
+        "OVERLAY_COLOR": "Overlay color",
+        "OVERLAY_OPACITY": "Overlay opacity",
+        "TEXT_COLOR": {
+            "SYSTEM": "System",
+            "INVERT": "Invert"
+        },
+        "TEXT_POSITION": {
+            "OVERLAID": "Overlaid",
+            "SEPARATED": "Separated"
+        },
+
+        "GROUP": {
+            "GROUPED": "Grouped",
+            "UNGROUPED": "Ungrouped"
+        },
+        
+        "ROUND_CORNER": "Round corner"
+    },
+
+    "IMAGE_EDITOR": {
+        "TAB_TITLE": "Gallery images",
+        "ADD_IMAGE": "Add image to Gallery",
+        "TITLE": "Title",
+        "DESCRIPTION": "Description",
+        "IMAGE_URL": "Image URL",
+        "ONLOAD_FLOW": "On load flow",
+        "FLOW": "Flow",
+        "DELETE_IMAGE": "Delete image",
+        "CHOOSE_IMAGE": "Choose Image",
+        "OPEN_ASSETS_MANAGER": "Assets Manager",
+        "CHOOSE_FLOW": "Choose Flow",
+        "CHOOSE_FLOW_ONLOAD_DESC": "Choose the flow you want to activate in On Load Event",
+        "CHOOSE_FLOW_ONCLICK_DESC": "Choose the flow you want to activate in On Click Event"
+    }
+}
+
+

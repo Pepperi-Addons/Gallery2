@@ -1,0 +1,13 @@
+<div class="galleryCardsCont" #galleryContainer
+     [ngClass]="['columnGap_'+ configuration?.GalleryConfig?.Gallery?.Gap]"
+     [ngStyle]="{'height' : configuration?.GalleryConfig?.Gallery?.FillHeight ? '100%' : 'min-content'}">
+     <gallery-card #cardContainer *ngFor="let currentCard of configuration?.Cards; let i = index" 
+                   [cardIndex] = i
+                   [ngStyle]="{'width': cardWidth}"
+                   [card]="currentCard" 
+                   [cardWidth]="cardWidth"
+                   [GalleryConfig]="configuration?.GalleryConfig"
+                   (cardClick)="onCardClicked($event)">
+     </gallery-card>
+     <div *ngIf="!configuration?.Cards || configuration?.Cards.length === 0" class="noImageFound">No Images</div>
+</div>

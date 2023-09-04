@@ -1,0 +1,21 @@
+{
+	"name": "typescript",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "cd ./shared && npm run build && cd .. && cd ./client-side && npm run build && cd .. && cd ./server-side && npm run build && cd .. && cd ./cpi-side && npm run build && cd ..",
+		"init": "cd ./shared && npm run build && cd .. && cd ./client-side && npm install --force && cd .. && cd ./server-side && npm install && cd .. && cd ./cpi-side && npm install && cd ..",
+		"publish-addon": "npm run build && publish-addon",
+		"cpi-publish-addon": "cd ./cpi-side && npm run build:debug && cd .. && cpi-node-debug"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@pepperi-addons/cpi-node": "^1.3.3",
+		"@pepperi-addons/papi-sdk": "^1.50.1",
+		"@pepperi-addons/scripts": "^2.0.13"
+	}
+}

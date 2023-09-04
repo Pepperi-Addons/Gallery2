@@ -1,0 +1,59 @@
+@use '@pepperi-addons/ngx-lib/src/core/style/abstracts/variables' as variables;
+
+.galleryCardsCont{
+
+    display: flex;
+    width: inherit;
+    flex-direction: row;
+    row-gap: normal;
+    flex-wrap: wrap;
+
+    // TODO - NEED TO GET THE SCREEN SIZE AS INPUT AND ADD CLASS 
+    @media screen and (max-width:360px) {
+        flex-direction: column;
+
+        ::ng-deep {
+            gallery-card{
+                width: 100% !important;
+            }
+        }
+    }
+
+    .noImageFound{
+        position: absolute;
+        top: 50%;
+        text-shadow: -15px 5px 20px #ced0d3;
+        color: white;
+        font-family: "Anton", Arial, sans-serif;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        font-size: 2em;
+        transition: all 0.25s ease-out;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+    &.columnGap_xs{
+        gap: variables.$spacing-xs;
+    }
+    &.columnGap_sm{
+        gap: variables.$spacing-sm;
+    }
+    &.columnGap_md{
+        gap: variables.$spacing-md;
+    }
+    &.columnGap_lg{
+        gap: variables.$spacing-lg;
+    }
+    &.columnGap_xl{
+        gap: variables.$spacing-xl;
+    }
+    // &.oneColumnView{
+    //     flex-direction: column;
+
+    //     gallery-card{
+    //         width: 100% !important;
+    //     }
+    // }
+}

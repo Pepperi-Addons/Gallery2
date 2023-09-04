@@ -1,0 +1,29 @@
+<div class="card-editor-container">
+    <div>
+        <pep-button classNames="lock-events" sizeType="xs" iconName="system_move"></pep-button>
+    </div>
+    <div *ngIf="title !== ''" class="title-container">
+        <span class="body-sm ellipsis">{{id + 1}}.&nbsp;</span>
+        <span class="body-sm color-link bold ellipsis" title="{{configuration?.Cards[id].Title}}">{{configuration?.Cards[id].Title}}</span>
+    </div>
+    <div class="actions" *ngIf="showActions">
+        <pep-button classNames="caution" sizeType="xs" iconName="system_bin" (buttonClick)="onRemoveClick();"></pep-button>
+        <pep-button *ngIf="id != configuration?.GalleryConfig?.editSlideIndex" sizeType="xs" iconName="arrow_down" (buttonClick)="onEditClick();"></pep-button>
+        <pep-button *ngIf="id == configuration?.GalleryConfig?.editSlideIndex" sizeType="xs" iconName="arrow_up" (buttonClick)="onEditClick();"></pep-button>
+    </div>
+    <div class="editorCont" *ngIf="id == configuration?.GalleryConfig?.editSlideIndex">
+        <pep-textbox [label]="'IMAGE_EDITOR.TITLE' | translate" type="string" [value]="configuration?.Cards[id].Title" (valueChange)="onCardFieldChange('Title',$event)"></pep-textbox>
+        <pep-textarea [value]="configuration?.Cards[id].Description" [label]="'IMAGE_EDITOR.DESCRIPTION' | translate"
+                      rowSpan="2" (valueChange)="onCardFieldChange('Description',$event)">
+        </pep-textarea>
+        <assets-button [imageURL]="configuration?.Cards[id].AssetURL" (hostEvents)="onHostEvents($event);"></assets-button>
+        <!-- <pep-textbox [label]="'IMAGE_EDITOR.LINK_TO' | translate" type="link" [value]="configuration?.Cards[id].linkTo" (valueChange)="onCardFieldChange('linkTo',$event)"></pep-textbox> -->
+        <!-- <label class="body-xs normal">{{'IMAGE_EDITOR.CHOOSE_FLOW_ONCLICK_DESC' | translate}}</label>
+        <pep-button class="script-button" [value]="cardFlowName ? cardFlowName : ('IMAGE_EDITOR.CHOOSE_FLOW' | translate)" (buttonClick)="openFlowPickerDialog();"></pep-button> -->
+        <div>
+            <label class="body-lg bold ellipsis">{{'IMAGE_EDITOR.FLOW' | translate}}</label>
+            <pep-field-title [label]="'IMAGE_EDITOR.CHOOSE_FLOW_ONCLICK_DESC' | translate"></pep-field-title>
+            <pep-flow-picker-button [flowHostObject]="flowHostObject" (flowChange)="onFlowChange($event)"></pep-flow-picker-button>
+        </div>
+    </div>
+</div>

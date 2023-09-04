@@ -1,0 +1,198 @@
+@use '@pepperi-addons/ngx-lib/src/core/style/abstracts/variables' as ngx-variables;
+@use '@pepperi-addons/ngx-lib/src/core/style/abstracts/functions' as ngx-functions;
+@use '@pepperi-addons/ngx-lib/src/core/style/abstracts/mixins' as ngx-mixins;
+
+*{
+    -webkit-font-smoothing: antialiased;
+}
+
+:host{
+   
+}
+.backgroundCont{
+    height: 100%;
+    height: -moz-available;          /* WebKit-based browsers will ignore this. */
+    height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    height: stretch; //  fill-available;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    pointer-events: none;
+}
+.galleryCardCont{
+    grid-template-rows: min-content auto min-content min-content min-content;
+    transition: transform .2s;
+    overflow: hidden;
+    box-sizing: content-box;
+    width: 100%;
+
+    div{
+        display: flex;
+
+        &.overlayCont,
+        &.gradCont{
+            height: inherit;
+            position: absolute;
+
+            &.separated{
+                position: relative;
+                height: unset;
+                width: 100% !important;
+            }
+           // z-index: -1;
+        }
+
+        &.overlayCont{
+            background-size: cover !important;
+            background-position: center !important;
+        }
+        &.imageCont{
+            height: inherit;
+            flex-direction: column;
+            padding: ngx-variables.$spacing-lg;
+            position: absolute;
+            //z-index: -1;
+        }
+        .groupedText{
+            display: flex; 
+            flex-direction: column;
+            // padding: ngx-variables.$spacing-md;
+            width: 100%;
+            z-index: 1;
+        }
+    }
+
+    .ungroupedText{
+        z-index: 1;
+    }
+
+    &.textColor_system-primary{
+        color: ngx-functions.get-pep-color(color-text, color-regular) !important;
+    }
+
+    &.textColor_invert{
+        color: ngx-functions.get-pep-color(color-text, color-invert) !important;
+    }
+
+    // &:hover {
+    //     transform: scale(1.01); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    // }
+
+    .regular{
+        font-weight: 400 !important;
+    }
+
+    .title-sm{
+        line-height: unset !important;
+        font-size: calc(#{ngx-variables.$fs-sm} * 1.75) !important; 
+        // height: calc(#{ngx-variables.$fs-sm} * 1.75);
+        // line-height: calc(#{ngx-variables.$fs-sm} * 1.75) !important;    
+    }
+    .title-md{
+        line-height: unset !important;
+        font-size: calc(#{ngx-variables.$fs-md} * 1.75) !important;  
+        // height: calc(#{ngx-variables.$fs-md} * 1.75);   
+        // line-height: calc(#{ngx-variables.$fs-md} * 1.75) !important;   
+    }
+    .title-lg{
+        line-height: unset !important;
+        font-size: calc(#{ngx-variables.$fs-lg} * 2.25) !important; 
+        // height: calc(#{ngx-variables.$fs-lg} * 2.25);  
+        // line-height: calc(#{ngx-variables.$fs-lg} * 2.25) !important;
+    }
+    .title-xl{
+        line-height: unset !important;
+        font-size: calc(#{ngx-variables.$fs-xl} * 2.5) !important; 
+        // height: calc(#{ngx-variables.$fs-xl} * 2.5); 
+        // line-height: calc(#{ngx-variables.$fs-xl} * 2.5) !important;     
+    }
+
+    .padding-block_xs{
+        padding-block: ngx-variables.$spacing-xs;
+    }
+    .padding-block_sm{
+            padding-block: ngx-variables.$spacing-sm;
+    }
+    .padding-block_md{
+        padding-block: ngx-variables.$spacing-md;
+    }
+    .padding-block_lg{
+        padding-block: ngx-variables.$spacing-lg;
+    }
+    .padding-block_xl{
+        padding-block: ngx-variables.$spacing-xl;
+    }
+   
+
+    &.shadow-xs{
+        &.soft{
+            box-shadow: ngx-functions.get-pep-shadow(shadow-xs, soft);
+        }
+        &.regular{
+            box-shadow: ngx-functions.get-pep-shadow(shadow-xs, regular);
+        }
+        &.hard{
+            box-shadow: ngx-functions.get-pep-shadow(shadow-xs, hard);
+        }
+    }
+    &.shadow-sm{
+        &.soft{
+            box-shadow: ngx-functions.get-pep-shadow(shadow-sm, soft);
+        }
+        &.regular{
+            box-shadow: ngx-functions.get-pep-shadow(shadow-sm, regular);
+        }
+        &.hard{
+            box-shadow: ngx-functions.get-pep-shadow(shadow-sm, hard);
+        }
+    }
+    &.shadow-md{
+        &.soft{
+            box-shadow: ngx-functions.get-pep-shadow(shadow-md, soft);
+        }
+        &.regular{
+            box-shadow: ngx-functions.get-pep-shadow(shadow-md, regular);
+        }
+        &.hard{
+            box-shadow: ngx-functions.get-pep-shadow(shadow-md, hard);
+        }
+    }
+    &.shadow-lg{
+        &.soft{
+            box-shadow: ngx-functions.get-pep-shadow(shadow-lg, soft);
+        }
+        &.regular{
+            box-shadow: ngx-functions.get-pep-shadow(shadow-lg, regular);
+        }
+        &.hard{
+            box-shadow: ngx-functions.get-pep-shadow(shadow-lg, hard);
+        }
+    }
+    &.shadow-xl{
+        &.soft{
+            box-shadow: ngx-functions.get-pep-shadow(shadow-xl, soft);
+        }
+        &.regular{
+            box-shadow: ngx-functions.get-pep-shadow(shadow-xl, regular);
+        }
+        &.hard{
+            box-shadow: ngx-functions.get-pep-shadow(shadow-xl, hard);
+        }
+    }
+}
+
+.textarea {
+    background: transparent;
+    width: 100%;
+    border: none;
+    resize: none; /* hide browser provided resize handles */
+    overflow-y: hidden;
+    -ms-overflow-style: none; /* hide scrollbar in IE and Edge */
+    scrollbar-width: none; /* hide scrollbar in Firefox */
+  }
+  
+  .textarea::-webkit-scrollbar {
+    display: none; /* hide scrollbar in Chrome and variants */
+  }
+  

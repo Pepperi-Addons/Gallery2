@@ -1,0 +1,4 @@
+<label class="body-xs normal ellipsis">{{'IMAGE_EDITOR.CHOOSE_IMAGE' | translate}}</label>
+<div #assetsBtnCont class="assets-btn-cont" [ngStyle]="{'background-image': 'url(' + imageURL + ')'}" (click)="onOpenAssetsDialog();">
+    <pep-button sizeType="sm" [styleType]="'regular'" [value]="'IMAGE_EDITOR.OPEN_ASSETS_MANAGER' | translate"  iconName="system_file_upload_cloud"></pep-button>
+</div>
