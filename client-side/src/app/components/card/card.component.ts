@@ -117,10 +117,6 @@ export class CardComponent implements OnInit {
     }
 
     onCardClicked() {
-        const flowData = this.card?.Flow;
-        if (flowData) {
-            // Implement script click
-            this.cardClick.emit(flowData);
-        }
+            this.cardClick.emit(this.cardIndex);
     }
 }

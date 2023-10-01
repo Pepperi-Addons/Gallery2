@@ -21,7 +21,7 @@ export class GalleryEditorComponent implements OnInit {
     dialogRef: MatDialogRef<any>;
 
     @Output() hostEvents: EventEmitter<any> = new EventEmitter<any>();
-    currentCardindex: number;
+    selectedCardindex: number = -1;
     blockLoaded = false;
     public flowHostObject;
 
@@ -239,14 +239,7 @@ export class GalleryEditorComponent implements OnInit {
     }
 
     onCardEditClick(event){
-       
-        if(this.configuration?.GalleryConfig?.editSlideIndex === event.id){ //close the editor
-            this.configuration.GalleryConfig.editSlideIndex = -1;
-        }
-        else{ 
-            this.currentCardindex = this.configuration.GalleryConfig.editSlideIndex = parseInt(event.id);
-        }
-        this.updateHostObjectField(`GalleryConfig.editSlideIndex`, this.configuration.GalleryConfig.editSlideIndex);
+        this.selectedCardindex = this.selectedCardindex == event.id ? -1 : event.id;
     }
 
     onCardRemoveClick(event){

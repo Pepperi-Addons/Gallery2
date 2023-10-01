@@ -3,7 +3,6 @@ import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Outpu
 import { IGallery, IHostObject } from '../gallery.model';
 import  { GalleryService } from '../../common/gallery.service';
 import { PepLayoutService } from '@pepperi-addons/ngx-lib';
-import { CLIENT_ACTION_ON_GALLERY_CARD_CLICK } from 'shared';
 
 @Component({
     selector: 'gallery',
@@ -87,37 +86,13 @@ export class GalleryComponent implements OnInit {
 
         return res;
     }
-
     onCardClicked(event) {
-        const flowData = event;
-        const parameters = {
-            configuration: this.configuration
-        }
-
-        //if(flowData){
-        // Parse the params if exist.
-        // const params = this.getScriptParams(event.ScriptData); 
-        try{
-            const eventData = {
-                detail: {
-                    eventKey: CLIENT_ACTION_ON_GALLERY_CARD_CLICK,
-                    eventData: { flow: flowData, parameters: parameters },
-                    completion: (res: any) => {
-                            if (res?.configuration) {
-                                this.configuration = res.configuration;
-                            } else {
-                                // Show default error.
-
-                            }
-                        }
-                }
-            };
-
-            const customEvent = new CustomEvent('emit-event', eventData);
-            window.dispatchEvent(customEvent);
-        }
-        catch(err){
-
+         //check if card has flow
+         if(event != null && this.configuration?.Cards[event].Flow){
+            this.hostEvents.emit({
+                action: 'button-click',
+                buttonKey: event
+            })
         }
     }
 }

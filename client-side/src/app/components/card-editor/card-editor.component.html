@@ -9,10 +9,8 @@
     <div class="actions" *ngIf="showActions">
         <pep-button sizeType="xs" iconName="system_copy" title="{{'EDITOR.CONTENT.DUPLICATE' | translate}}" (buttonClick)="onDuplicateClick();"></pep-button>
         <pep-button classNames="caution" sizeType="xs" iconName="system_bin" (buttonClick)="onRemoveClick();"></pep-button>
-        <!-- <pep-button *ngIf="id != configuration?.GalleryConfig?.editSlideIndex" sizeType="xs" iconName="arrow_down" (buttonClick)="onEditClick();"></pep-button> -->
-        <!-- <pep-button *ngIf="id == configuration?.GalleryConfig?.editSlideIndex" sizeType="xs" iconName="arrow_up" (buttonClick)="onEditClick();"></pep-button> -->
     </div>
-    <div class="editorCont" *ngIf="id == configuration?.GalleryConfig?.editSlideIndex">
+    <div class="editorCont" *ngIf="id == selectedCardIndex?.toString()">
         <pep-textbox [label]="'IMAGE_EDITOR.TITLE' | translate" type="string" [value]="configuration?.Cards[id].Title" (valueChange)="onCardFieldChange('Title',$event)"></pep-textbox>
         <pep-textarea [value]="configuration?.Cards[id].Description" [label]="'IMAGE_EDITOR.DESCRIPTION' | translate"
                       rowSpan="2" (valueChange)="onCardFieldChange('Description',$event)">

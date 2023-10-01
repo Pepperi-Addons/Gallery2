@@ -75,7 +75,6 @@ export class IGalleryEditor {
     Description: Title = new Title(true, 'md', 'regular', 'sm', 1);
     Overlay: PepColorSettings = new PepColorSettings(true, 'hsl(190, 100%, 50%)', 75);
     GradientOverlay: PepColorSettings  = new PepColorSettings(true, 'hsl(0, 0%, 90%)', 75);
-    editSlideIndex: number = -1;
 }
 
 export class ICardEditor {

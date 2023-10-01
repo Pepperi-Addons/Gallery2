@@ -33,6 +33,7 @@ export class CardEditorComponent implements OnInit, AfterViewInit{
 
     @Input() isDraggable = false;
     @Input() showActions = true;
+    @Input() selectedCardIndex = -1;
 
     @Output() hostEvents: EventEmitter<any> = new EventEmitter<any>();
     @Output() removeClick: EventEmitter<any> = new EventEmitter();

@@ -150,7 +150,8 @@ async function runMigration(client){
                 }
             },
             //OnPageLoadEndpoint: "/addon-cpi/prepare_assets",
-            BlockLoadEndpoint: "/addon-cpi/on_gallery_block_load"
+            BlockLoadEndpoint: "/addon-cpi/on_gallery_block_load",
+            BlockButtonClickEndpoint: "/addon-cpi/run_card_click_event",
         };
 
         const service = new MyService(client);
