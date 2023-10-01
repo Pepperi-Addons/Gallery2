@@ -1,6 +1,7 @@
 import { PepHorizontalAlignment, PepSizeType} from "@pepperi-addons/ngx-lib";
 import { PepShadowSettings} from "@pepperi-addons/ngx-composite-lib/shadow-settings";
 import { PepColorSettings } from "@pepperi-addons/ngx-composite-lib/color-settings";
+import { Page } from "@pepperi-addons/papi-sdk";
 export type textColor = 'system-primary' | 'dimmed' | 'invert' | 'strong';
 export type verticalAlignment = 'start' | 'middle' | 'end';
 export type textPositionStyling = 'overlaid' | 'separated';
@@ -10,10 +11,15 @@ export type FontWeight = 'regular' | 'bold' | 'bolder';
 export interface IHostObject {
     configuration: IGallery;
     parameters: any;
-    // pageConfiguration?: PageConfiguration;
-    // pageType?: any;
-    // context?: any;
-    // filter?: any;
+}
+
+export interface IEditorHostObject {
+    state: any;
+    configuration: IGallery;
+    configurationSource: IGallery;
+    pageConfiguration: any;
+    page: Page,
+    parameters: any;
 }
 
 export interface IGallery{
@@ -69,34 +75,7 @@ export class IGalleryEditor {
     Description: Title = new Title(true, 'md', 'regular', 'sm', 1);
     Overlay: PepColorSettings = new PepColorSettings(true, 'hsl(190, 100%, 50%)', 75);
     GradientOverlay: PepColorSettings  = new PepColorSettings(true, 'hsl(0, 0%, 90%)', 75);
-
-    //maxColumns: number = 2;
-    //gap: PepSizeType = 'md';
-    //fillHeight: boolean = false;
-    //border: PepColorSettings = new PepColorSettings();
-    //cardHeight: number = 16;
-    //cardTextColor: textColor = 'system-primary';
-    //useText: boolean = true;
-    //textPosition: textPositionStyling = 'overlaid';
-    //verticalAlign: verticalAlignment  = 'middle';
-    //horizontalAlign: PepHorizontalAlignment = 'center';
-    
-    //useTitle: boolean = true;
-    //titleSize: PepSizeType = 'lg';
-    //titleWeight: FontWeight = 'regular';
-    //titleInnerSpacing: PepSizeType = 'sm';
-    //useDescription: boolean = true;
-    //descriptionSize: PepSizeType = 'md';
-    //descriptionInnerSpacing: PepSizeType = 'sm';
-    //descriptionMaxNumOfLines: number = 1;
-    //groupTitleAndDescription: groupTitleAndDescription = 'grouped';
-    //overlay: PepColorSettings = new PepColorSettings(true, 'hsl(190, 100%, 50%)', 75);
-    //gradientOverlay: PepColorSettings  = new PepColorSettings(true, 'hsl(0, 0%, 90%)', 75);
     editSlideIndex: number = -1;
-
-    //dropShadow: PepShadowSettings = new PepShadowSettings();
-    //useRoundCorners: boolean = true;
-    //roundCornersSize: PepSizeType = 'md';
 }
 
 export class ICardEditor {
@@ -106,9 +85,4 @@ export class ICardEditor {
     AssetKey: string = '';
     AssetURL: string = '';
     Flow: any;
-    //title: string = "defaultTitle";
-    //description: string = "defaultDescription";
-    //asset: string = '';
-    //AssetURL: string = '';
-    //script: any;
 }

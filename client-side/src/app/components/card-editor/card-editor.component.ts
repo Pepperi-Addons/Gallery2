@@ -37,6 +37,8 @@ export class CardEditorComponent implements OnInit, AfterViewInit{
     @Output() hostEvents: EventEmitter<any> = new EventEmitter<any>();
     @Output() removeClick: EventEmitter<any> = new EventEmitter();
     @Output() editClick: EventEmitter<any> = new EventEmitter();
+    @Output() duplicateClick: EventEmitter<any> = new EventEmitter();
+    @Output() flowChange: EventEmitter<any> = new EventEmitter();
 
     dialogRef: MatDialogRef<any>;
     
@@ -61,6 +63,10 @@ export class CardEditorComponent implements OnInit, AfterViewInit{
 
     onRemoveClick() {
         this.removeClick.emit({id: this.id});
+    }
+
+    onDuplicateClick(){
+        this.duplicateClick.emit({id: this.id});
     }
 
     onEditClick() {
@@ -109,60 +115,11 @@ export class CardEditorComponent implements OnInit, AfterViewInit{
         }     
     }
 
-    // openFlowPickerDialog() {
-    //     const flow = this.configuration?.Cards[this.id]['Flow'] ?  JSON.parse(atob(this.configuration?.Cards[this.id]['Flow'])) : null;
-    //     let hostObj = {};
-    //     if(flow){
-    //         hostObj = { 
-    //             runFlowData: { 
-    //                 FlowKey: flow.FlowKey, 
-    //                 FlowParams: flow.FlowParams 
-    //             },
-    //             fields: {
-    //                 OnLoad: {
-    //                     Type: 'Object',
-    //                 },
-    //                 Test: {
-    //                     Type: 'String'
-    //                 }
-    //             }
-    //         };
-    //     } else{
-    //         hostObj = { 
-    //             fields: {
-    //                     OnLoad: {
-    //                         Type: 'Object',
-    //                     },
-    //                     Test: {
-    //                         Type: 'String'
-    //                     }
-    //                 },
-    //             }
-    //     }
-
-    //     this.dialogRef = this.addonBlockLoaderService.loadAddonBlockInDialog({
-    //         container: this.viewContainerRef,
-    //         name: 'FlowPicker',
-    //         size: 'large',
-    //         hostObject: hostObj,
-    //         hostEventsCallback: async (event) => {
-    //             if (event.action === 'on-done') {
-    //                     const base64Flow = btoa(JSON.stringify(event.data));
-    //                     this.configuration.Cards[this.id]['Flow'] = base64Flow;
-    //                     this.updateHostObject(true);
-    //                     this.dialogRef.close();
-    //             } else if (event.action === 'on-cancel') {
-    //                     this.dialogRef.close();
-    //             }
-    //         }
-    //     })
-
-    // }
-
     onFlowChange(flowData: any) {
         const base64Flow = btoa(JSON.stringify(flowData));
         this.configuration.Cards[this.id]['Flow'] = base64Flow;
         this.updateHostObject(true);
+        this.flowChange.emit();
     }
 }
 

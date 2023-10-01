@@ -2,14 +2,15 @@
     <div>
         <pep-button classNames="lock-events" sizeType="xs" iconName="system_move"></pep-button>
     </div>
-    <div *ngIf="title !== ''" class="title-container">
+    <div *ngIf="title !== ''" class="title-container" (click)="onEditClick();">
         <span class="body-sm ellipsis">{{id + 1}}.&nbsp;</span>
         <span class="body-sm color-link bold ellipsis" title="{{configuration?.Cards[id].Title}}">{{configuration?.Cards[id].Title}}</span>
     </div>
     <div class="actions" *ngIf="showActions">
+        <pep-button sizeType="xs" iconName="system_copy" title="{{'EDITOR.CONTENT.DUPLICATE' | translate}}" (buttonClick)="onDuplicateClick();"></pep-button>
         <pep-button classNames="caution" sizeType="xs" iconName="system_bin" (buttonClick)="onRemoveClick();"></pep-button>
-        <pep-button *ngIf="id != configuration?.GalleryConfig?.editSlideIndex" sizeType="xs" iconName="arrow_down" (buttonClick)="onEditClick();"></pep-button>
-        <pep-button *ngIf="id == configuration?.GalleryConfig?.editSlideIndex" sizeType="xs" iconName="arrow_up" (buttonClick)="onEditClick();"></pep-button>
+        <!-- <pep-button *ngIf="id != configuration?.GalleryConfig?.editSlideIndex" sizeType="xs" iconName="arrow_down" (buttonClick)="onEditClick();"></pep-button> -->
+        <!-- <pep-button *ngIf="id == configuration?.GalleryConfig?.editSlideIndex" sizeType="xs" iconName="arrow_up" (buttonClick)="onEditClick();"></pep-button> -->
     </div>
     <div class="editorCont" *ngIf="id == configuration?.GalleryConfig?.editSlideIndex">
         <pep-textbox [label]="'IMAGE_EDITOR.TITLE' | translate" type="string" [value]="configuration?.Cards[id].Title" (valueChange)="onCardFieldChange('Title',$event)"></pep-textbox>

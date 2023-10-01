@@ -174,9 +174,9 @@
     <mat-tab cdkDropListGroup label="{{'GALLERY_EDITOR.TABS.CONTENT' | translate}}">
         <label class="body-xl bold ellipsis">{{'IMAGE_EDITOR.TAB_TITLE' | translate}}</label>
             <div (cdkDropListDropped)="drop($event)"  cdkDropList>
-                <card-editor *ngFor="let currentCard of configuration?.Cards;" 
+                <card-editor *ngFor="let currentCard of configuration?.Cards;"  (flowChange)='onCardFlowChanged($event);'
                     [id]="currentCard?.id" [showActions]="true" (hostEvents)='onHostObjectChange($event)'
-                    [isDraggable]="true" (editClick)='onCardEditClick($event);' (removeClick)='onCardRemoveClick($event);'
+                    [isDraggable]="true" (editClick)='onCardEditClick($event);' (removeClick)='onCardRemoveClick($event);' (duplicateClick)="onCardDuplicateClick($event)"
                     [configuration]="configuration" [pageParameters]="pageParameters"
                     cdkDrag [cdkDragDisabled]="currentCard?.id == configuration?.GalleryConfig?.editSlideIndex" style="cursor: grab;" (cdkDragStarted)="onDragStart($event)" (cdkDragEnded)="onDragEnd($event)">
                 </card-editor>

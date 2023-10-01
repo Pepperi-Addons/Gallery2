@@ -1,5 +1,4 @@
 import { Client, Context, IClient, IContext } from '@pepperi-addons/cpi-node/build/cpi-side/events';
-import { CLIENT_ACTION_ON_GALLERY_CARD_CLICK } from 'shared';
 import { AddonUUID } from '../addon.config.json';
 import { FlowObject, RunFlowBody } from '@pepperi-addons/cpi-node';
 

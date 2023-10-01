@@ -1,10 +1,10 @@
 import { TranslateService } from '@ngx-translate/core';
 import { Component, EventEmitter, Input, OnInit, Output, ViewContainerRef } from '@angular/core';
-import { IGallery, IGalleryEditor, ICardEditor } from '../gallery.model';
+import { IGallery, IGalleryEditor, ICardEditor, IEditorHostObject, Card } from '../gallery.model';
 import { PepButton } from '@pepperi-addons/ngx-lib/button';
 import  { GalleryService } from '../../common/gallery.service';
 import { CdkDragDrop, CdkDragEnd, CdkDragStart, moveItemInArray} from '@angular/cdk/drag-drop';
-import { PageConfiguration, PapiClient } from '@pepperi-addons/papi-sdk';
+import { Page, PageConfiguration, PapiClient } from '@pepperi-addons/papi-sdk';
 import { AddonService } from "src/app/services/addon.service";
 import { MatDialogRef } from '@angular/material/dialog';
 import { PepAddonBlockLoaderService } from '@pepperi-addons/ngx-lib/remote-loader';
@@ -26,30 +26,29 @@ export class GalleryEditorComponent implements OnInit {
     public flowHostObject;
 
     @Input()
-    set hostObject(value: any) {
+    set hostObject(value: IEditorHostObject) {
         if (value?.configuration && Object.keys(value.configuration).length) {
                 this._configuration = value.configuration;
-
-                this.initPageConfiguration(value?.pageConfiguration);
-                const page = value?.page;
-                this.flowService.recalculateEditorData(page , this._pageConfiguration);
-
-                this.flowHostObject = this.flowService.prepareFlowHostObject((value.configuration.GalleryConfig?.OnLoadFlow || null));
             if(value.configurationSource && Object.keys(value.configuration).length > 0){
                 this.configurationSource = value.configurationSource;
             }
+            this.flowHostObject = this.flowService.prepareFlowHostObject((value.configuration.GalleryConfig?.OnLoadFlow || null));
         } else {
             // TODO - NEED TO ADD DEFAULT CARD
             if(this.blockLoaded){
                 this.loadDefaultConfiguration();
             }
         }
-        
-        this._pageParameters = value?.pageParameters || {};
+
+        this.initPageConfiguration(value?.pageConfiguration);
+        this._page = value?.page;
+        this.flowService.recalculateEditorData(this._page, this._pageConfiguration); 
     }
 
-
-    public configurationSource: IGallery;
+    private _page: Page;
+    get page(): Page {
+        return this._page;
+    }
 
     private _configuration: IGallery;
     get configuration(): IGallery {
@@ -65,6 +64,7 @@ export class GalleryEditorComponent implements OnInit {
     private defaultPageConfiguration: PageConfiguration = { "Parameters": [] };
     private _pageConfiguration: PageConfiguration = this.defaultPageConfiguration;
     
+    public configurationSource: IGallery;
     public textColor: Array<PepButton> = [];
     public verticalAlign: Array<PepButton> = [];
     public TextPositionStyling: Array<PepButton> = [];
@@ -72,11 +72,7 @@ export class GalleryEditorComponent implements OnInit {
 
     constructor(private translate: TranslateService, 
                 private galleryService: GalleryService,
-                private flowService: FlowService,
-                private viewContainerRef: ViewContainerRef,
-                private addonBlockLoaderService: PepAddonBlockLoaderService) {
-                 
-                }
+                private flowService: FlowService,) {}
 
     async ngOnInit(): Promise<void> {
 
@@ -111,10 +107,6 @@ export class GalleryEditorComponent implements OnInit {
 
     ngOnChanges(e: any): void {
 
-    }
-    
-    private initPageConfiguration(value: PageConfiguration = null) {
-        this._pageConfiguration = value || JSON.parse(JSON.stringify(this.defaultPageConfiguration));
     }
 
     public onHostObjectChange(event) {
@@ -167,28 +159,6 @@ export class GalleryEditorComponent implements OnInit {
 
         // Return the parameters as array.
         return [...parameters];
-    }
-
-    private updatePageConfigurationObject() {
-        const params = this.getPageConfigurationParametersNames();
-        this._pageConfiguration = this.defaultPageConfiguration;
-
-        // Add the parameter to page configuration.
-        for (let paramIndex = 0; paramIndex < params.length; paramIndex++) {
-            const param = params[paramIndex];
-            
-            this._pageConfiguration.Parameters.push({
-                Key: param,
-                Type: 'String',
-                Consume: true,
-                Produce: false
-            });
-        }
-
-        this.hostEvents.emit({
-            action: 'set-page-configuration',
-            pageConfiguration: this._pageConfiguration
-        });
     }
 
     onGalleryFieldChange(key, event){
@@ -277,14 +247,22 @@ export class GalleryEditorComponent implements OnInit {
             this.currentCardindex = this.configuration.GalleryConfig.editSlideIndex = parseInt(event.id);
         }
         this.updateHostObjectField(`GalleryConfig.editSlideIndex`, this.configuration.GalleryConfig.editSlideIndex);
-        //this.cdr.detectChanges();
-        //this.updateHostObject();
     }
 
     onCardRemoveClick(event){
         this.configuration?.Cards.splice(event.id, 1);
         this.configuration?.Cards.forEach(function(card, index, arr) {card.id = index; });
         this.updateHostObject();
+    }
+
+    onCardDuplicateClick(event){
+        let card = new ICardEditor();
+        card = JSON.parse(JSON.stringify(this.configuration.Cards[event.id]));
+
+        card.id = (this.configuration?.Cards.length);
+        this.configuration?.Cards.push(card);
+        this._configuration = this.configuration
+        this.updateHostObject();  
     }
 
     drop(event: CdkDragDrop<string[]>) {
@@ -305,9 +283,98 @@ export class GalleryEditorComponent implements OnInit {
         this.galleryService.changeCursorOnDragEnd();
     }
 
-    onFlowChange(flowData: any) {
+      /***************   FLOW AND CONSUMER PARAMETERS START   ********************************/
+      onFlowChange(flowData: any) {
         const base64Flow = btoa(JSON.stringify(flowData));
         this.configuration.GalleryConfig.OnLoadFlow = base64Flow;
         this.updateHostObject();
+        this.updatePageConfigurationObject();
     }
+
+    onCardFlowChanged(event: any) {
+        this.updatePageConfigurationObject();
+    }
+
+    private initPageConfiguration(value: PageConfiguration = null) {
+        this._pageConfiguration = value || JSON.parse(JSON.stringify(this.defaultPageConfiguration));
+    }
+
+    private updatePageConfigurationObject() {
+        this.initPageConfiguration();
+    
+        // Get the consume parameters keys from the filters.
+        const consumeParametersKeys = this.getConsumeParametersKeys();
+        this.addParametersToPageConfiguration(consumeParametersKeys, false, true);
+        
+        // After adding the params to the page configuration need to recalculate the page parameters.
+        this.flowService.recalculateEditorData(this._page, this._pageConfiguration);
+
+        this.emitSetPageConfiguration();
+    }
+
+    private getConsumeParametersKeys(): Map<string, string> {
+        const parametersKeys = new Map<string, string>();
+
+        // Move on onload flows
+        const onLoadFlow = this.configuration?.GalleryConfig?.OnLoadFlow || null;
+        if (onLoadFlow) {
+            let flowParams = JSON.parse(atob(onLoadFlow)).FlowParams;
+            Object.keys(flowParams).forEach(key => {
+                const param = flowParams[key];
+                if (param.Source === 'Dynamic') {
+                    parametersKeys.set(param.Value, param.Value);
+                }
+            });
+        }
+        
+        // Move on all the gallery cards flows.
+        for (let index = 0; index < this.configuration?.Cards?.length; index++) {
+            const btn = this.configuration.Cards[index];
+            if (btn?.Flow) {
+                const flowParams = JSON.parse(atob(btn.Flow)).FlowParams || null;
+                Object.keys(flowParams).forEach(key => {
+                    const param = flowParams[key];
+                    if (param.Source === 'Dynamic') {
+                        parametersKeys.set(param.Value, param.Value);
+                    }
+                });
+            }
+        }
+
+        return parametersKeys;
+    }
+
+    private addParametersToPageConfiguration(paramsMap: Map<string, string>, isProduce: boolean, isConsume: boolean) {
+        const params = Array.from(paramsMap.values());
+
+        // Add the parameters to page configuration.
+        for (let index = 0; index < params.length; index++) {
+            const parameterKey = params[index];
+            if(parameterKey !== 'configuration'){
+                const paramIndex = this._pageConfiguration.Parameters.findIndex(param => param.Key === parameterKey);
+
+                // If the parameter exist, update the consume/produce.
+                if (paramIndex >= 0) {
+                    this._pageConfiguration.Parameters[paramIndex].Consume = this._pageConfiguration.Parameters[paramIndex].Consume || isConsume;
+                    this._pageConfiguration.Parameters[paramIndex].Produce = this._pageConfiguration.Parameters[paramIndex].Produce || isProduce;
+                } else {
+                    // Add the parameter only if not exist.
+                    this._pageConfiguration.Parameters.push({
+                        Key: parameterKey,
+                        Type: 'String',
+                        Consume: isConsume,
+                        Produce: isProduce
+                    });
+                }
+            }
+        }
+    }
+
+    private emitSetPageConfiguration() {
+        this.hostEvents.emit({
+            action: 'set-page-configuration',
+            pageConfiguration: this._pageConfiguration
+        });
+    }
+    /***************   FLOW AND CONSUMER PARAMETERS END   ********************************/
 }

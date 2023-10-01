@@ -1,7 +1,7 @@
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
 import { PepColorService, PepLayoutService, PepScreenSizeType, PepSizeType, PepStyleType } from '@pepperi-addons/ngx-lib';
-import { IGallery, IGalleryEditor, IHostObject, ICardEditor  } from '../../gallery.model';
+import { IGallery, IGalleryEditor, ICardEditor  } from '../../gallery.model';
 import { GalleryService } from 'src/common/gallery.service';
 import { PepColorSettings } from '@pepperi-addons/ngx-composite-lib/color-settings';
 
@@ -39,10 +39,6 @@ export class CardComponent implements OnInit {
     private getDefaultHostObject(): IGallery {
         return { GalleryConfig: new IGalleryEditor(), Cards: Array<ICardEditor>() };
     }
-
-    // getCardImageURL() {
-    //        return this.card?.AssetURL !== '' ? 'url("' + this.card.AssetURL + '")' : '';
-    // }
 
     ngOnChanges(changes) { 
         if (changes) {

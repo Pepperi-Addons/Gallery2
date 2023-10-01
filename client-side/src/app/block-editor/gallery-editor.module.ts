@@ -13,7 +13,7 @@ import { PepColorModule } from '@pepperi-addons/ngx-lib/color';
 import { PepImageModule } from '@pepperi-addons/ngx-lib/image';
 import { PepTextareaModule, } from '@pepperi-addons/ngx-lib/textarea';
 import { PepPageLayoutModule } from '@pepperi-addons/ngx-lib/page-layout';
-import { pepIconTextAlignCenter, pepIconTextAlignLeft, pepIconTextAlignRight, pepIconArrowBackRight, pepIconArrowBackLeft, pepIconArrowBack, pepIconArrowLeftAlt,pepIconArrowDown, pepIconArrowUp, PepIconModule, pepIconNumberPlus, PepIconRegistry, pepIconSystemBin, pepIconSystemBolt, pepIconSystemClose, pepIconSystemEdit, pepIconSystemMove } from '@pepperi-addons/ngx-lib/icon';
+import { pepIconTextAlignCenter, pepIconTextAlignLeft, pepIconTextAlignRight, pepIconArrowBackRight, pepIconArrowBackLeft, pepIconArrowBack, pepIconArrowLeftAlt,pepIconArrowDown, pepIconArrowUp, PepIconModule, pepIconNumberPlus, PepIconRegistry, pepIconSystemBin, pepIconSystemBolt, pepIconSystemClose, pepIconSystemEdit, pepIconSystemMove, pepIconSystemCopy } from '@pepperi-addons/ngx-lib/icon';
 import { CardEditorModule } from '../components/card-editor/card-editor.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PepShadowSettingsModule } from '@pepperi-addons/ngx-composite-lib/shadow-settings';
@@ -39,6 +39,7 @@ const pepIcons = [
     pepIconSystemBolt,
     pepIconSystemEdit,
     pepIconSystemMove,
+    pepIconSystemCopy,
     pepIconSystemBin,
     pepIconArrowLeftAlt,
     pepIconArrowDown,
