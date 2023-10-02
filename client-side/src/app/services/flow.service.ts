@@ -16,7 +16,6 @@ export class FlowService {
     public prepareFlowHostObject(flow) {
         let flowHostObject = {};
         const runFlowData =  flow ? JSON.parse(atob(flow)) : null;
-        //const runFlowData = this.menuItem?.Flow || null;
      
         const fields = {
             configuration: {
@@ -24,14 +23,12 @@ export class FlowService {
             },
         };
         
-        if (runFlowData) {
-            this.flowDynamicParameters.forEach((value, key) => {
+        this.flowDynamicParameters.forEach((value, key) => {
                 fields[key] = {
                     Type: value || 'String'
                 };
-            });
-        }
-        
+        });
+
         flowHostObject['runFlowData'] = runFlowData?.FlowKey ? runFlowData : undefined;
         flowHostObject['fields'] = fields;
 

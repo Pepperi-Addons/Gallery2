@@ -103,6 +103,8 @@ export class GalleryEditorComponent implements OnInit {
             { key: 'end', value: this.translate.instant('GALLERY_EDITOR.VERTICAL_ALIGN.BOTTOM'), callback: (event: any) => this.onGalleryFieldChange('Text.VerticalAlign',event) }
         ]
         this.blockLoaded = true;
+
+        this.flowHostObject = this.flowService.prepareFlowHostObject((this.configuration.GalleryConfig?.OnLoadFlow || null));
     }
 
     ngOnChanges(e: any): void {
