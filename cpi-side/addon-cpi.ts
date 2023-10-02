@@ -30,10 +30,10 @@ router.post('/run_card_click_event', async (req, res) => {
     const state = req.body.State;
     const btnID = req.body.ButtonKey;
     // check if flow configured to on load --> run flow (instaed of onload event)
-    if (configuration?.Buttons[btnID]?.Flow){
+    if (configuration?.Cards[btnID]?.Flow){
         const cpiService = new GalleryCpiService();
         //CALL TO FLOWS AND SET CONFIGURATION
-        const result: any = await cpiService.getOptionsFromFlow(configuration.GalleryConfig.OnLoadFlow || [], state , req.context, configuration);
+        const result: any = await cpiService.getOptionsFromFlow(configuration.Cards[btnID].Flow || [], state , req.context, configuration);
         configuration = result?.configuration || configuration;
     }
     res.json({Configuration: configuration});
