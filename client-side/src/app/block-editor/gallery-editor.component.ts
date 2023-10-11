@@ -55,12 +55,6 @@ export class GalleryEditorComponent implements OnInit {
         return this._configuration;
     }
 
-    // All the page parameters to set in page configuration when needed (for FlowPicker addon usage).
-    private _pageParameters: any;
-    get pageParameters(): any {
-        return this._pageParameters;
-    }
-
     private defaultPageConfiguration: PageConfiguration = { "Parameters": [] };
     private _pageConfiguration: PageConfiguration = this.defaultPageConfiguration;
     

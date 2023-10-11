@@ -48,11 +48,21 @@ export class GalleryComponent implements OnInit {
     }
 
     async ngOnInit(): Promise<void> {
+        this.hostEvents.emit({
+            action: 'register-state-change',
+            callback: this.registerStateChange.bind(this)
+        });
+
         this.setCardWidth();
     }
 
     ngOnChanges(e: any): void {
    
+    }
+    
+    private registerStateChange(data: {state: any, configuration: any}) {
+        this.configuration = data.configuration;
+        this.setCardWidth();
     }
     
     setCardWidth(){

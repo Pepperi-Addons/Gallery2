@@ -36,7 +36,6 @@ import { PepFieldTitleModule } from '@pepperi-addons/ngx-lib/field-title';
         PepNgxLibModule,
         PepSelectModule,
         MatDialogModule,
-        //PepPageLayoutModule,
         PepGroupButtonsModule,
         PepColorModule,
         PepImageModule,

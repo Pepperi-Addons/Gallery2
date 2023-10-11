@@ -22,12 +22,6 @@ export class CardEditorComponent implements OnInit, AfterViewInit{
     @Input() configuration: IGallery;
     @Input() id: string;
 
-    private _pageParameters: any = {};
-    @Input()
-    set pageParameters(value: any) {
-        this._pageParameters = value;
-    }
-
     public title: string;
     public flowHostObject;
 

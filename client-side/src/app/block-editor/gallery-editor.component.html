@@ -177,7 +177,7 @@
                 <card-editor *ngFor="let currentCard of configuration?.Cards;"  (flowChange)='onCardFlowChanged($event);'
                     [id]="currentCard?.id" [selectedCardIndex]="selectedCardindex" [showActions]="true" (hostEvents)='onHostObjectChange($event)'
                     [isDraggable]="true" (editClick)='onCardEditClick($event);' (removeClick)='onCardRemoveClick($event);' (duplicateClick)="onCardDuplicateClick($event)"
-                    [configuration]="configuration" [pageParameters]="pageParameters"
+                    [configuration]="configuration"
                     cdkDrag [cdkDragDisabled]="currentCard?.id == selectedCardindex" style="cursor: grab;" (cdkDragStarted)="onDragStart($event)" (cdkDragEnded)="onDragEnd($event)">
                 </card-editor>
             </div>
