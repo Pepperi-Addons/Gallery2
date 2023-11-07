@@ -28,7 +28,7 @@
         <pep-group-buttons-settings pepResetConfigurationField="GalleryConfig.Gallery.Gap" [hideReset]="configuration?.GalleryConfig?.Gallery?.Gap === configurationSource?.GalleryConfig?.Gallery?.Gap" 
                     [resetHostEvents]="hostEvents"
                     [groupType]="'sizes'" [subHeader]="'GALLERY_EDITOR.GAP' | translate"
-                    [btnKey]="configuration?.GalleryConfig?.Gallery?.Gap" [useNone]="true" [excludeKeys]="['xs','xl','xxl']"
+                    [btnKey]="configuration?.GalleryConfig?.Gallery?.Gap" [useNone]="true" [excludeKeys]="['xs','xl','2xl']"
                     (btnkeyChange)="onGalleryFieldChange('Gallery.Gap',$event)">
         </pep-group-buttons-settings>
         
@@ -89,7 +89,7 @@
         <pep-group-buttons-settings pepResetConfigurationField="GalleryConfig.Title.InnerSpacing" [hideReset]="configuration?.GalleryConfig?.Title?.InnerSpacing === configurationSource?.GalleryConfig?.Title?.InnerSpacing" 
             [resetHostEvents]="hostEvents" [disabled]="!configuration?.GalleryConfig?.Text.Use || !configuration?.GalleryConfig?.Title?.Use" 
             [groupType]="'sizes'" [subHeader]="'GALLERY_EDITOR.INNER_SPACING' | translate" [useNone]="true"
-            [btnKey]="configuration?.GalleryConfig?.Title?.InnerSpacing"  [excludeKeys]="['xl','xxl']"
+            [btnKey]="configuration?.GalleryConfig?.Title?.InnerSpacing"  [excludeKeys]="['xs','xl','2xl']"
             (btnkeyChange)="onGalleryFieldChange('Title.InnerSpacing',$event)">
         </pep-group-buttons-settings>
 
@@ -120,7 +120,7 @@
         <pep-group-buttons-settings pepResetConfigurationField="GalleryConfig.Title.InnerSpacing" [hideReset]="configuration?.GalleryConfig?.Title?.InnerSpacing === configurationSource?.GalleryConfig?.Title?.InnerSpacing" 
         [resetHostEvents]="hostEvents" [disabled]="!configuration?.GalleryConfig?.Text.Use || !configuration?.GalleryConfig?.Description?.Use" 
         [groupType]="'sizes'" [subHeader]="'GALLERY_EDITOR.INNER_SPACING' | translate" [useNone]="true"
-        [btnKey]="configuration?.GalleryConfig?.Description?.InnerSpacing"  [excludeKeys]="['xl','xxl']"
+        [btnKey]="configuration?.GalleryConfig?.Description?.InnerSpacing"  [excludeKeys]="['xl','2xl']"
         (btnkeyChange)="onGalleryFieldChange('Description.InnerSpacing',$event)">
     </pep-group-buttons-settings>
 
