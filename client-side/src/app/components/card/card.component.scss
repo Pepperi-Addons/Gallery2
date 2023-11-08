@@ -29,6 +29,7 @@
 
     div{
         display: flex;
+        overflow: auto;
 
         &.overlayCont,
         &.gradCont{
@@ -104,6 +105,12 @@
     .title-xl{
         line-height: unset !important;
         font-size: calc(#{ngx-variables.$fs-xl} * 2.5) !important; 
+        // height: calc(#{ngx-variables.$fs-xl} * 2.5); 
+        // line-height: calc(#{ngx-variables.$fs-xl} * 2.5) !important;     
+    }
+    .title-2xl{
+        line-height: unset !important;
+        font-size: calc(#{ngx-variables.$fs-2xl} * 3) !important; 
         // height: calc(#{ngx-variables.$fs-xl} * 2.5); 
         // line-height: calc(#{ngx-variables.$fs-xl} * 2.5) !important;     
     }

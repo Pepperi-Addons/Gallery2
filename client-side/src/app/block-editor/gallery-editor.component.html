@@ -113,7 +113,7 @@
                                     [resetHostEvents]="hostEvents"
                                     [groupType]="'sizes'" [subHeader]="'GALLERY_EDITOR.DESCRIPTION_SIZE' | translate"
                                     [disabled]="!configuration?.GalleryConfig?.Text.Use || !configuration?.GalleryConfig?.Description?.Use" 
-                                    [btnKey]="configuration?.GalleryConfig?.Description?.Size" [excludeKeys]="['xs']"
+                                    [btnKey]="configuration?.GalleryConfig?.Description?.Size" [excludeKeys]="['xs','2xl']"
                                     (btnkeyChange)="onGalleryFieldChange('Description.Size',$event)">
         </pep-group-buttons-settings>
 
@@ -139,7 +139,7 @@
         
         <pep-group-buttons-settings [groupType]="'sizes'"
             [disabled]="!configuration?.GalleryConfig?.Card?.UseRoundCorners" 
-            [btnKey]="configuration?.GalleryConfig?.Card?.RoundCornersSize" [excludeKeys]="['xs']"
+            [btnKey]="configuration?.GalleryConfig?.Card?.RoundCornersSize" [excludeKeys]="['xs','2xl']"
             (btnkeyChange)="onGalleryFieldChange('Card.RoundCornersSize',$event)">
         </pep-group-buttons-settings>
 
