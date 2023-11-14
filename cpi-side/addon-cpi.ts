@@ -36,7 +36,8 @@ router.post('/on_gallery_block_load', async (req, res) => {
 });
 
 router.post('/run_card_click_event', async (req, res) => {
-    const btnID = req.body.ButtonKey;
+    //const btnID = req.body.ButtonKey;
+    const btnKey = req.body.ButtonKey;
     const state = req.body.State;
     let configuration = req?.body?.Configuration;
 
@@ -48,12 +49,13 @@ router.post('/run_card_click_event', async (req, res) => {
     }
 
     let configurationRes = configuration;
-
+    const btn = configuration?.Cards?.filter(card => { card.ButtonKey === btnKey }) || null;
+        
     // check if flow configured to on load --> run flow (instaed of onload event)
-    if (configuration?.Cards[btnID]?.Flow){
+    if (btn?.Flow){
         const cpiService = new GalleryCpiService();
         //CALL TO FLOWS AND SET CONFIGURATION
-        const result: any = await cpiService.getOptionsFromFlow(configuration.Cards[btnID].Flow || [], state , req.context, configuration);
+        const result: any = await cpiService.getOptionsFromFlow(btn.Flow || [], state , req.context, configuration);
         configurationRes = result?.configuration || configuration;
     }
     

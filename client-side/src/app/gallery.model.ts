@@ -7,6 +7,7 @@ export type verticalAlignment = 'start' | 'middle' | 'end';
 export type textPositionStyling = 'overlaid' | 'separated';
 export type groupTitleAndDescription = 'grouped' | 'ungrouped';
 export type FontWeight = 'regular' | 'bold' | 'bolder';
+import { v4 as uuid } from 'uuid';
 
 export interface IHostObject {
     configuration: IGallery;
@@ -84,4 +85,5 @@ export class ICardEditor {
     AssetKey: string = '';
     AssetURL: string = '';
     Flow: any;
+    ButtonKey = uuid();
 }

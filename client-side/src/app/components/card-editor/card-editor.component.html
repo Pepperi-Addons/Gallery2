@@ -16,13 +16,12 @@
                       rowSpan="2" (valueChange)="onCardFieldChange('Description',$event)">
         </pep-textarea>
         <assets-button [imageURL]="configuration?.Cards[id].AssetURL" (hostEvents)="onHostEvents($event);"></assets-button>
-        <!-- <pep-textbox [label]="'IMAGE_EDITOR.LINK_TO' | translate" type="link" [value]="configuration?.Cards[id].linkTo" (valueChange)="onCardFieldChange('linkTo',$event)"></pep-textbox> -->
-        <!-- <label class="body-xs normal">{{'IMAGE_EDITOR.CHOOSE_FLOW_ONCLICK_DESC' | translate}}</label>
-        <pep-button class="script-button" [value]="cardFlowName ? cardFlowName : ('IMAGE_EDITOR.CHOOSE_FLOW' | translate)" (buttonClick)="openFlowPickerDialog();"></pep-button> -->
         <div>
             <label class="body-lg bold ellipsis">{{'IMAGE_EDITOR.FLOW' | translate}}</label>
             <pep-field-title [label]="'IMAGE_EDITOR.CHOOSE_FLOW_ONCLICK_DESC' | translate"></pep-field-title>
             <pep-flow-picker-button [flowHostObject]="flowHostObject" (flowChange)="onFlowChange($event)"></pep-flow-picker-button>
         </div>
+        <pep-textbox [label]="'IMAGE_EDITOR.ACTION_KEY' | translate" type="string" [disabled]="true" 
+                     [value]="configuration?.Cards[id].ButtonKey"></pep-textbox>
     </div>
 </div>

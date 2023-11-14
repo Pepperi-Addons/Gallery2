@@ -98,10 +98,11 @@ export class GalleryComponent implements OnInit {
     }
     onCardClicked(event) {
          //check if card has flow
-         if(event != null && this.configuration?.Cards[event].Flow){
+         const card = this.configuration?.Cards[event];
+         if(card?.Flow){
             this.hostEvents.emit({
                 action: 'button-click',
-                buttonKey: event
+                buttonKey: card.ButtonKey
             })
         }
     }

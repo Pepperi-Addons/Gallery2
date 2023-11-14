@@ -1,5 +1,5 @@
 
-<div class="galleryCardCont" 
+<div class="galleryCardCont" (click)="onCardClicked()"
     [ngStyle]="{'display': GalleryConfig?.Text?.Position === 'overlaid' ? 'block' : 'grid',
                 'height' : GalleryConfig?.Gallery?.FillHeight ? '100%' : (GalleryConfig?.Card?.Height + 'rem'),
                 'cursor' : card?.Flow && card?.Flow != '' ? 'pointer' : 'inherit',
@@ -7,8 +7,7 @@
     [ngClass]="['textColor_'+ GalleryConfig?.Card?.TextColor,
                 GalleryConfig?.Card?.DropShadow?.use ? 'shadow-' + this.GalleryConfig?.Card?.DropShadow?.size : '',
                 GalleryConfig?.Card?.DropShadow?.use ? this.GalleryConfig?.Card?.DropShadow?.intensity : '',
-                GalleryConfig?.Card?.UseRoundCorners ? 'border-radius-' + GalleryConfig?.Card?.RoundCornersSize : '']"
-    (click)="onCardClicked()">
+                GalleryConfig?.Card?.UseRoundCorners ? 'border-radius-' + GalleryConfig?.Card?.RoundCornersSize : '']">
 
     <ng-container *ngIf="GalleryConfig?.Text.Use && 
                          GalleryConfig?.Text?.Position === 'separated' &&

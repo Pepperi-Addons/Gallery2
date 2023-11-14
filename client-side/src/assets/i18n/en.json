@@ -72,6 +72,7 @@
     "IMAGE_EDITOR": {
         "TAB_TITLE": "Gallery images",
         "ADD_IMAGE": "Add image to Gallery",
+        "ACTION_KEY": "Action key",
         "TITLE": "Title",
         "DESCRIPTION": "Description",
         "IMAGE_URL": "Image URL",

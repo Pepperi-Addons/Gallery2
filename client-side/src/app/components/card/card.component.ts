@@ -45,8 +45,7 @@ export class CardComponent implements OnInit {
         }
     }
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
     
     getGalleryBorder() {
         if(this.GalleryConfig?.Card?.Border.use){
@@ -117,6 +116,6 @@ export class CardComponent implements OnInit {
     }
 
     onCardClicked() {
-            this.cardClick.emit(this.cardIndex);
+        this.cardClick.emit(this.cardIndex);
     }
 }
