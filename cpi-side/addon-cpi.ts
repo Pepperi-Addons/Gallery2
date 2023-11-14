@@ -49,7 +49,7 @@ router.post('/run_card_click_event', async (req, res) => {
     }
 
     let configurationRes = configuration;
-    const btn = configuration?.Cards?.filter(card => { card.ButtonKey === btnKey }) || null;
+    const btn = configuration?.Cards?.filter(card => { return card.ButtonKey === btnKey })[0] || null;
         
     // check if flow configured to on load --> run flow (instaed of onload event)
     if (btn?.Flow){
