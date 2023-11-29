@@ -82,7 +82,6 @@ export class CardComponent implements OnInit {
 
         let colorsStr =  this.galleryService.getRGBAcolor(gradient) +' , '+ this.galleryService.getRGBAcolor(gradient,0);
         let gradType = direction === 'circle' ? 'radial-gradient' : 'linear-gradient';
-
         let gradStr = this.GalleryConfig.GradientOverlay.use ? gradType + '(' + direction +' , '+ colorsStr +')' : '';
 
         if(gradStr != ''){

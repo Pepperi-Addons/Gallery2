@@ -9,6 +9,7 @@ import { AddonService } from "src/app/services/addon.service";
 import { MatDialogRef } from '@angular/material/dialog';
 import { PepAddonBlockLoaderService } from '@pepperi-addons/ngx-lib/remote-loader';
 import { FlowService } from '../services/flow.service';
+import { v4 as uuid } from 'uuid';
 
 
 @Component({
@@ -249,6 +250,7 @@ export class GalleryEditorComponent implements OnInit {
         card = JSON.parse(JSON.stringify(this.configuration.Cards[event.id]));
 
         card.id = (this.configuration?.Cards.length);
+        card.ButtonKey = uuid();
         this.configuration?.Cards.push(card);
         this._configuration = this.configuration
         this.updateHostObject();  
