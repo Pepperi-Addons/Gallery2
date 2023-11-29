@@ -23,10 +23,13 @@ export async function install(client: Client, request: Request): Promise<any> {
     const galleryRelationsRes = await runMigration(client);
     const dimxRes = await createDimxRelations(client);
     const dimxSchemeRes = await addDimxScheme(client);
-   
+    const deleteGalleryRelation = await deleteOldGalleryRelation(client);
     return {
-        success: galleryRelationsRes.success && dimxRes.success && dimxSchemeRes.success,
-        errorMessage: `galleryRelationsRes: ${galleryRelationsRes.errorMessage}, userDeviceResourceRes: ${dimxRes.errorMessage}, userDeviceResourceRes: ${dimxSchemeRes.errorMessage}`
+        success: galleryRelationsRes.success && dimxRes.success && dimxSchemeRes.success && deleteGalleryRelation.success,
+        errorMessage: `galleryRelationsRes: ${galleryRelationsRes.errorMessage},
+                       userDeviceResourceRes: ${dimxRes.errorMessage},
+                       userDeviceResourceRes: ${dimxSchemeRes.errorMessage},
+                       deleteOldGalleryRelation: ${deleteGalleryRelation.errorMessage}`
     };
 }
 
@@ -38,10 +41,14 @@ export async function upgrade(client: Client, request: Request): Promise<any> {
     const galleryRelationsRes = await runMigration(client);
     const dimxRes = await createDimxRelations(client);
     const dimxSchemeRes = await addDimxScheme(client);
+    const deleteGalleryRelation = await deleteOldGalleryRelation(client);
    
     return {
         success: galleryRelationsRes.success && dimxRes.success && dimxSchemeRes.success,
-        errorMessage: `galleryRelationsRes: ${galleryRelationsRes.errorMessage}, userDeviceResourceRes: ${dimxRes.errorMessage}, userDeviceResourceRes: ${dimxSchemeRes.errorMessage}`
+        errorMessage: `galleryRelationsRes: ${galleryRelationsRes.errorMessage},
+        userDeviceResourceRes: ${dimxRes.errorMessage},
+        userDeviceResourceRes: ${dimxSchemeRes.errorMessage},
+        deleteOldGalleryRelation: ${deleteGalleryRelation.errorMessage}`
     };
 }
 
@@ -202,5 +209,19 @@ async function addDimxScheme(client) {
                 success: false,
                 errorMessage: `Error in creating gallery scheme for dimx . error - ${err}`
             }
+    }
+}
+
+async function deleteOldGalleryRelation(client: Client){
+    try {
+        const service = new MyService(client);
+        await service.papiClient.addons.api.uuid('5adbc9e0-ed1d-4b2d-98e9-9c50891812ea').file('api').func('delete_relation').post();
+        return {
+            success: true,
+            errorMessage: ''
+        }
+    }
+    catch(e) {
+        return { success: false, errorMessage: e || 'Slideshow - delete relation failed' };
     }
 }

@@ -2,7 +2,7 @@
     <mat-tab label="{{'GALLERY_EDITOR.TABS.GENERAL' | translate}}">
 
         <label class="body-xl bold ellipsis">{{'GALLERY_EDITOR.GRID' | translate}}</label>
-        <pep-slider pepResetConfigurationField="GalleryConfig.Gallery?.MaxColumns" [hideReset]="configuration?.GalleryConfig?.Gallery?.MaxColumns === configurationSource?.GalleryConfig?.Gallery?.MaxColumns"  
+        <pep-slider pepResetConfigurationField="GalleryConfig.Gallery.MaxColumns" [hideReset]="configuration?.GalleryConfig?.Gallery?.MaxColumns === configurationSource?.GalleryConfig?.Gallery?.MaxColumns"  
         [resetHostEvents]="hostEvents"
                 [label]="'GALLERY_EDITOR.MAX_COLUMNS' | translate" 
                 [hint]="configuration?.GalleryConfig?.Gallery?.MaxColumns?.toString()" 
