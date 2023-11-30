@@ -159,7 +159,8 @@ async function runMigration(client){
             //OnPageLoadEndpoint: "/addon-cpi/prepare_assets",
             BlockLoadEndpoint: "/addon-cpi/on_gallery_block_load",
             BlockButtonClickEndpoint: "/addon-cpi/run_card_click_event",
-            BlockStateChangeEndpoint: "/addon-cpi/on_block_state_change"
+            BlockStateChangeEndpoint: "/addon-cpi/on_block_state_change",
+            Title: 'Gallery'
         };
 
         const service = new MyService(client);
