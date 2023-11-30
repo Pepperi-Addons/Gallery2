@@ -215,10 +215,10 @@ async function addDimxScheme(client) {
 async function deleteOldGalleryRelation(client: Client){
     try {
         const service = new MyService(client);
-        await service.papiClient.addons.api.uuid('5adbc9e0-ed1d-4b2d-98e9-9c50891812ea').file('api').func('delete_relation').post();
+        const res = await service.papiClient.addons.api.uuid('5adbc9e0-ed1d-4b2d-98e9-9c50891812ea').file('api').func('delete_relation').post();
         return {
-            success: true,
-            errorMessage: ''
+            success: res.success,
+            errorMessage: res.errorMessage
         }
     }
     catch(e) {
