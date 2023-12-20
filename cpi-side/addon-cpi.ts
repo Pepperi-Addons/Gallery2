@@ -1,7 +1,6 @@
 import '@pepperi-addons/cpi-node';
 import GalleryCpiService from './gallery-cpi.service';
 export const router:any = Router()
-import * as _ from 'lodash'
 
 router.post('/on_gallery_block_load', async (req, res) => {
     let configuration = req?.body?.Configuration;
@@ -9,10 +8,15 @@ router.post('/on_gallery_block_load', async (req, res) => {
     const state = req.body.State;
     //check if flow configured to on load --> run flow (instaed of onload event)
     if (configuration?.GalleryConfig?.OnLoadFlow){
-        const cpiService = new GalleryCpiService();
-        //CALL TO FLOWS AND SET CONFIGURATION
-        const res: any = await cpiService.getOptionsFromFlow(configuration.GalleryConfig.OnLoadFlow, state , req.context, configuration);
-        configurationRes = res?.configuration || configuration;
+        try{
+            const cpiService = new GalleryCpiService();
+            //CALL TO FLOWS AND SET CONFIGURATION
+            const res: any = await cpiService.getOptionsFromFlow(configuration.GalleryConfig.OnLoadFlow, state , req.context, configuration);
+            configurationRes = res?.configuration || configuration;
+        }
+        catch(err){
+            configurationRes = configuration;
+        }
     }
 
     if(!(await pepperi['environment'].isWebApp())) {
@@ -23,11 +27,6 @@ router.post('/on_gallery_block_load', async (req, res) => {
         }))
         configurationRes.Cards = cards;
     }
-
-    const difference = _.differenceWith(_.toPairs(configurationRes), _.toPairs(configuration), _.isEqual);
-    difference.forEach(diff => {
-        state[diff[0]] = diff[1];
-    });
 
     res.json({
         State: state,
@@ -41,14 +40,7 @@ router.post('/run_card_click_event', async (req, res) => {
     const state = req.body.State;
     let configuration = req?.body?.Configuration;
 
-    for (var prop in configuration) {
-        // skip loop if the property dont exits on state object
-        if (!state.hasOwnProperty(prop)) continue;
-        //update configuration with the object from state
-        configuration[prop] = state[prop]; 
-    }
-
-    let configurationRes = configuration;
+    let configurationRes = null;
     const btn = configuration?.Cards?.filter(card => { return card.ButtonKey === btnKey })[0] || null;
         
     // check if flow configured to on load --> run flow (instaed of onload event)
@@ -56,13 +48,8 @@ router.post('/run_card_click_event', async (req, res) => {
         const cpiService = new GalleryCpiService();
         //CALL TO FLOWS AND SET CONFIGURATION
         const result: any = await cpiService.getOptionsFromFlow(btn.Flow || [], state , req.context, configuration);
-        configurationRes = result?.configuration || configuration;
+        configurationRes = result?.configuration;
     }
-    
-    const difference = _.differenceWith(_.toPairs(configurationRes), _.toPairs(configuration), _.isEqual);
-    difference.forEach(diff => {
-        state[diff[0]] = diff[1];
-    });
 
     res.json({
         State: state,

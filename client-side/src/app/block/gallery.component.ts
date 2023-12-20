@@ -61,10 +61,21 @@ export class GalleryComponent implements OnInit {
     }
     
     private registerStateChange(data: {state: any, configuration: any}) {
-        this.configuration = data.configuration;
-        this.setCardWidth();
+        if(data?.configuration){
+            //this.configuration = data.configuration;
+            this.mergeConfiguration(data.configuration);
+            this.setCardWidth();
+        }
     }
     
+    private mergeConfiguration(newConfiguration){
+        for (const prop in this.configuration) {
+            // skip loop if the property dont exits on new object
+            if (!newConfiguration.hasOwnProperty(prop)) continue;
+            //update configuration with the object from new object
+            this.configuration[prop] = newConfiguration[prop]; 
+        }
+    }
     setCardWidth(){
         const gap = this.configuration?.GalleryConfig?.Gallery?.Gap || 'none';
         const maxColumns = this.configuration?.GalleryConfig?.Gallery?.MaxColumns || 1;
