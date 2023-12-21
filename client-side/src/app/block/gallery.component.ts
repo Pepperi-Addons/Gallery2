@@ -14,7 +14,10 @@ export class GalleryComponent implements OnInit {
     
     @Input()
     set hostObject(value: IHostObject) {
-        this._configuration = value?.configuration;
+        if(value?.configuration && Object.keys(value.configuration).length){
+            this.configuration = value?.configuration;
+        }
+        
         this._parameters = value?.parameters || {};
             //check if MaxColumns has been changed , and calc the cards width;
             //if(this.configuration && this.configuration.GalleryConfig.Gallery.MaxColumns !== value?.configuration?.GalleryConfig.Gallery.MaxColumns){
@@ -61,14 +64,17 @@ export class GalleryComponent implements OnInit {
     }
     
     private registerStateChange(data: {state: any, configuration: any}) {
-        if(data?.configuration){
-            //this.configuration = data.configuration;
-            this.mergeConfiguration(data.configuration);
-            this.setCardWidth();
+        if(!this.configuration && data?.configuration){
+            this.configuration = data.configuration;
         }
+        else if(data?.configuration){
+            this.mergeConfiguration(data.configuration);
+        }
+        this.setCardWidth();
     }
     
     private mergeConfiguration(newConfiguration){
+        
         for (const prop in this.configuration) {
             // skip loop if the property dont exits on new object
             if (!newConfiguration.hasOwnProperty(prop)) continue;
