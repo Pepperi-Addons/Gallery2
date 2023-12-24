@@ -23,13 +23,12 @@ export async function install(client: Client, request: Request): Promise<any> {
     const galleryRelationsRes = await runMigration(client);
     const dimxRes = await createDimxRelations(client);
     const dimxSchemeRes = await addDimxScheme(client);
-    const deleteGalleryRelation = await deleteOldGalleryRelation(client);
+    // const deleteGalleryRelation = await deleteOldGalleryRelation(client);
     return {
         success: galleryRelationsRes.success && dimxRes.success && dimxSchemeRes.success && deleteGalleryRelation.success,
         errorMessage: `galleryRelationsRes: ${galleryRelationsRes.errorMessage},
                        userDeviceResourceRes: ${dimxRes.errorMessage},
-                       userDeviceResourceRes: ${dimxSchemeRes.errorMessage},
-                       deleteOldGalleryRelation: ${deleteGalleryRelation.errorMessage}`
+                       userDeviceResourceRes: ${dimxSchemeRes.errorMessage}`
     };
 }
 
@@ -41,14 +40,13 @@ export async function upgrade(client: Client, request: Request): Promise<any> {
     const galleryRelationsRes = await runMigration(client);
     const dimxRes = await createDimxRelations(client);
     const dimxSchemeRes = await addDimxScheme(client);
-    const deleteGalleryRelation = await deleteOldGalleryRelation(client);
+    // const deleteGalleryRelation = await deleteOldGalleryRelation(client);
    
     return {
         success: galleryRelationsRes.success && dimxRes.success && dimxSchemeRes.success,
         errorMessage: `galleryRelationsRes: ${galleryRelationsRes.errorMessage},
         userDeviceResourceRes: ${dimxRes.errorMessage},
-        userDeviceResourceRes: ${dimxSchemeRes.errorMessage},
-        deleteOldGalleryRelation: ${deleteGalleryRelation.errorMessage}`
+        userDeviceResourceRes: ${dimxSchemeRes.errorMessage}`
     };
 }
 
@@ -223,6 +221,6 @@ async function deleteOldGalleryRelation(client: Client){
         }
     }
     catch(e) {
-        return { success: false, errorMessage: e || 'Slideshow - delete relation failed' };
+        return { success: false, errorMessage: e || 'Gallery1 - delete relation failed' };
     }
 }
