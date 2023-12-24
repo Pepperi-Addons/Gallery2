@@ -25,7 +25,7 @@ export async function install(client: Client, request: Request): Promise<any> {
     const dimxSchemeRes = await addDimxScheme(client);
     // const deleteGalleryRelation = await deleteOldGalleryRelation(client);
     return {
-        success: galleryRelationsRes.success && dimxRes.success && dimxSchemeRes.success && deleteGalleryRelation.success,
+        success: galleryRelationsRes.success && dimxRes.success && dimxSchemeRes.success,
         errorMessage: `galleryRelationsRes: ${galleryRelationsRes.errorMessage},
                        userDeviceResourceRes: ${dimxRes.errorMessage},
                        userDeviceResourceRes: ${dimxSchemeRes.errorMessage}`
