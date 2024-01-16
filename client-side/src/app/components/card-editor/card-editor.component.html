@@ -6,10 +6,12 @@
         <span class="body-sm ellipsis">{{id + 1}}.&nbsp;</span>
         <span class="body-sm color-link bold ellipsis" title="{{configuration?.Cards[id].Title}}">{{configuration?.Cards[id].Title}}</span>
     </div>
-    <div class="actions" *ngIf="showActions">
-        <pep-button sizeType="xs" iconName="system_copy" title="{{'EDITOR.CONTENT.DUPLICATE' | translate}}" (buttonClick)="onDuplicateClick();"></pep-button>
-        <pep-button classNames="caution" sizeType="xs" iconName="system_bin" (buttonClick)="onRemoveClick();"></pep-button>
-    </div>
+    <pep-menu
+        *ngIf="showActions"
+        sizeType="xs"
+        [items]="actiosMenu"
+        (menuItemClick)="onMenuItemClick($event)">
+    </pep-menu>
     <div class="editorCont" *ngIf="id == selectedCardIndex?.toString()">
         <pep-textbox [label]="'IMAGE_EDITOR.TITLE' | translate" type="string" [value]="configuration?.Cards[id].Title" (valueChange)="onCardFieldChange('Title',$event)"></pep-textbox>
         <pep-textarea [value]="configuration?.Cards[id].Description" [label]="'IMAGE_EDITOR.DESCRIPTION' | translate"

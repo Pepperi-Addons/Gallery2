@@ -6,6 +6,7 @@ import { PepButton } from '@pepperi-addons/ngx-lib/button';
 import { IGallery } from 'src/app/gallery.model';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FlowService } from 'src/app/services/flow.service';
+import { IPepMenuItemClickEvent, PepMenuItem } from '@pepperi-addons/ngx-lib/menu';
 
 interface groupButtonArray {
     key: string; 
@@ -36,6 +37,7 @@ export class CardEditorComponent implements OnInit, AfterViewInit{
     @Output() flowChange: EventEmitter<any> = new EventEmitter();
 
     dialogRef: MatDialogRef<any>;
+    actiosMenu: Array<PepMenuItem> = [];
     
     constructor (
         private translate: TranslateService,
@@ -43,7 +45,12 @@ export class CardEditorComponent implements OnInit, AfterViewInit{
     }
 
     async ngOnInit(): Promise<void> {
-        const desktopTitle = await this.translate.get('SLIDESHOW.HEIGHTUNITS_REM').toPromise();    
+        const desktopTitle = await this.translate.get('SLIDESHOW.HEIGHTUNITS_REM').toPromise();  
+        
+        this.actiosMenu = [
+            { key: 'duplicate', text: this.translate.instant('IMAGE_EDITOR.DUPLICATE') },
+            { key: 'delete', text: this.translate.instant('IMAGE_EDITOR.DELETE') }
+        ]
     }
 
     ngAfterViewInit(): void {
@@ -56,12 +63,13 @@ export class CardEditorComponent implements OnInit, AfterViewInit{
         return n + (s[(v-20)%10] || s[v] || s[0]);
     }
 
-    onRemoveClick() {
-        this.removeClick.emit({id: this.id});
-    }
-
-    onDuplicateClick(){
-        this.duplicateClick.emit({id: this.id});
+    onMenuItemClick(item: IPepMenuItemClickEvent){
+        if(item?.source?.key == 'delete'){
+            this.removeClick.emit({id: this.id});
+        }
+        else if(item?.source?.key == 'duplicate'){
+            this.duplicateClick.emit({id: this.id});
+        }
     }
 
     onEditClick() {
@@ -89,17 +97,6 @@ export class CardEditorComponent implements OnInit, AfterViewInit{
             updatePageConfiguration: updatePageConfiguration
         });
     }
-
-    // onSlideshowFieldChange(key, event){
-    //     if(event && event.source && event.source.key){
-    //         this.configuration.GalleryConfig[key] = event.source.key;
-    //     }
-    //     else{
-    //         this.configuration.GalleryConfig[key] = event;
-    //     }
-
-    //     this.updateHostObject();
-    // }
 
     onHostEvents(event: any) {
         if(event?.url) {

@@ -80,6 +80,8 @@
         "FLOW": "Flow",
         "DELETE_IMAGE": "Delete image",
         "CHOOSE_IMAGE": "Choose Image",
+        "DELETE": "Delete",
+        "DUPLICATE": "Duplicate",
         "OPEN_ASSETS_MANAGER": "Assets Manager",
         "CHOOSE_FLOW": "Choose Flow",
         "CHOOSE_FLOW_ONLOAD_DESC": "Choose the flow you want to activate in On Load Event",
