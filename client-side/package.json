@@ -30,7 +30,7 @@
         "@ngx-translate/http-loader": "^7.0.0",
         "@nrwl/workspace": "^10.3.0",
         "@pepperi-addons/ngx-composite-lib": "^0.4.2-beta.57",
-        "@pepperi-addons/ngx-lib": "^0.4.2-beta.176",
+        "@pepperi-addons/ngx-lib": "^0.4.2-beta.177",
         "@pepperi-addons/papi-sdk": "^1.50.1",
         "@tweenjs/tween.js": "^17.1.1",
         "concurrently": "^5.3.0",

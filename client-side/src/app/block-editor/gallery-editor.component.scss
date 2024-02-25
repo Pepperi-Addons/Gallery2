@@ -1,16 +1,6 @@
 @use '@pepperi-addons/ngx-lib/src/core/style/abstracts/variables' as ngx-variables;
 
 .page-builder-editor-tabs {
-    ::ng-deep{
-        .mat-slider-disabled {
-            opacity: 0.6;
-        }
-
-        // .pep-reset-configuration-field-container {
-        //     margin-bottom: calc(#{ngx-variables.$spacing-lg} * -1) !important;
-        // }
-    }
-
     .available-items {
         display: flex;
         flex-flow: column;
