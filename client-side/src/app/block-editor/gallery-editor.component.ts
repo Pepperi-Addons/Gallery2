@@ -29,10 +29,18 @@ export class GalleryEditorComponent implements OnInit {
     @Input()
     set hostObject(value: IEditorHostObject) {
         if (value?.configuration && Object.keys(value.configuration).length) {
+            // Override only if the configuration is not the same object
+            if (JSON.stringify(this._configuration) !== JSON.stringify(value.configuration)) {
                 this._configuration = value.configuration;
-            if(value.configurationSource && Object.keys(value.configuration).length > 0){
-                this.configurationSource = value.configurationSource;
             }
+   
+            if(value.configurationSource && Object.keys(value.configuration).length > 0){
+                // Override only if the configuration is not the same object
+                if (JSON.stringify(this.configurationSource) !== JSON.stringify(value.configurationSource)) {
+                    this.configurationSource = value.configurationSource;
+                }
+            }
+
             this.flowHostObject = this.flowService.prepareFlowHostObject((value.configuration.GalleryConfig?.OnLoadFlow || null));
         } else {
             // TODO - NEED TO ADD DEFAULT CARD

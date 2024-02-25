@@ -4,12 +4,16 @@ export const router:any = Router()
 
 router.post('/on_gallery_block_load', async (req, res) => {
     let configuration = req?.body?.Configuration;
-    let configurationRes = configuration;
+    const cpiService = new GalleryCpiService();
     const state = req.body.State;
+    
+    // Set translations;
+    cpiService.setUserTranslations(configuration);
+    let configurationRes = configuration;
+
     //check if flow configured to on load --> run flow (instaed of onload event)
     if (configuration?.GalleryConfig?.OnLoadFlow){
         try{
-            const cpiService = new GalleryCpiService();
             //CALL TO FLOWS AND SET CONFIGURATION
             const res: any = await cpiService.getOptionsFromFlow(configuration.GalleryConfig.OnLoadFlow, state , req.context, configuration);
             configurationRes = res?.configuration || configuration;

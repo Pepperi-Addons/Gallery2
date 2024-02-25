@@ -1,4 +1,4 @@
-<div class="card-editor-container">
+<!-- <div class="card-editor-container">
     <div>
         <pep-button classNames="lock-events" sizeType="xs" iconName="system_move"></pep-button>
     </div>
@@ -9,7 +9,7 @@
     <pep-menu
         *ngIf="showActions"
         sizeType="xs"
-        [items]="actiosMenu"
+        [items]="actionsMenu"
         (menuItemClick)="onMenuItemClick($event)">
     </pep-menu>
     <div class="editorCont" *ngIf="id == selectedCardIndex?.toString()">
@@ -26,4 +26,24 @@
         <pep-textbox [label]="'IMAGE_EDITOR.ACTION_KEY' | translate" type="string" [disabled]="true" 
                      [value]="configuration?.Cards[id].ButtonKey"></pep-textbox>
     </div>
-</div>
+</div> -->
+
+<pep-draggable-item titlePrefix="{{ id + 1 }}.&nbsp;" title="{{configuration?.Cards[id].Title}}" styleType="weak" [toggleContent]="true" 
+    [actionsMenu]="actionsMenu" [shadow]="false" titleClassNames="color-link" [isToggleContentOpen]="id == selectedCardIndex?.toString()" 
+    (contentToggle)="onEditClick($event);" (actionsMenuItemClick)="onMenuItemClick($event)">
+    <ng-container pep-toggle-content>
+        <pep-textbox [label]="'IMAGE_EDITOR.TITLE' | translate" type="string" [value]="configuration?.Cards[id].Title" (valueChange)="onCardFieldChange('Title',$event)"></pep-textbox>
+        <pep-textarea [value]="configuration?.Cards[id].Description" [label]="'IMAGE_EDITOR.DESCRIPTION' | translate"
+                      rowSpan="2" (valueChange)="onCardFieldChange('Description',$event)">
+        </pep-textarea>
+        <assets-button [imageURL]="configuration?.Cards[id].AssetURL" (hostEvents)="onHostEvents($event);"></assets-button>
+        <div class="editor-separator"></div>
+        <div>
+            <label class="editor-sub-title">{{'IMAGE_EDITOR.FLOW' | translate}}</label>
+            <pep-field-title [label]="'IMAGE_EDITOR.CHOOSE_FLOW_ONCLICK_DESC' | translate"></pep-field-title>
+            <pep-flow-picker-button [flowHostObject]="flowHostObject" styleType="regular" (flowChange)="onFlowChange($event)"></pep-flow-picker-button>
+        </div>
+        <pep-textbox [label]="'IMAGE_EDITOR.ACTION_KEY' | translate" type="string" [disabled]="true" 
+                     [value]="configuration?.Cards[id].ButtonKey"></pep-textbox>
+    </ng-container>
+</pep-draggable-item>

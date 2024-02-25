@@ -20,6 +20,7 @@ import { AssetsButtonModule } from '../assets-button/assets-button.module';
 import { config } from '../../addon.config';
 import { PepFlowPickerButtonModule } from '@pepperi-addons/ngx-composite-lib/flow-picker-button';
 import { PepFieldTitleModule } from '@pepperi-addons/ngx-lib/field-title';
+import { PepDraggableItemsModule } from '@pepperi-addons/ngx-lib/draggable-items';
 
 @NgModule({
     declarations: [CardEditorComponent],
@@ -40,6 +41,7 @@ import { PepFieldTitleModule } from '@pepperi-addons/ngx-lib/field-title';
         PepColorModule,
         PepImageModule,
         PepTextareaModule,
+        PepDraggableItemsModule,
         AssetsButtonModule,
         TranslateModule.forChild({
             loader: {

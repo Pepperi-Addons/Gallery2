@@ -37,7 +37,7 @@ export class CardEditorComponent implements OnInit, AfterViewInit{
     @Output() flowChange: EventEmitter<any> = new EventEmitter();
 
     dialogRef: MatDialogRef<any>;
-    actiosMenu: Array<PepMenuItem> = [];
+    actionsMenu: Array<PepMenuItem> = [];
     
     constructor (
         private translate: TranslateService,
@@ -47,7 +47,7 @@ export class CardEditorComponent implements OnInit, AfterViewInit{
     async ngOnInit(): Promise<void> {
         const desktopTitle = await this.translate.get('SLIDESHOW.HEIGHTUNITS_REM').toPromise();  
         
-        this.actiosMenu = [
+        this.actionsMenu = [
             { key: 'duplicate', text: this.translate.instant('IMAGE_EDITOR.DUPLICATE') },
             { key: 'delete', text: this.translate.instant('IMAGE_EDITOR.DELETE') }
         ]
@@ -72,8 +72,8 @@ export class CardEditorComponent implements OnInit, AfterViewInit{
         }
     }
 
-    onEditClick() {
-        this.editClick.emit({id: this.id});
+    onEditClick(event) {
+        this.editClick.emit({id: event ? this.id : -1});
     }
 
     onCardFieldChange(key, event){

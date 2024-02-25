@@ -16,6 +16,10 @@ class GalleryCpiService {
         return {};
     }
     
+    /***********************************************************************************************/
+    //                              Public functions
+    /************************************************************************************************/
+
     public  async getOptionsFromFlow(flowStr: string, state: any, context: IContext | undefined, configuration = {}): Promise<any> {
         const flowData: FlowObject = flowStr?.length ? JSON.parse(Buffer.from(flowStr, 'base64').toString('utf8')) : {};
         
@@ -57,10 +61,15 @@ class GalleryCpiService {
 
         
     }
-     /***********************************************************************************************/
-    //                              Public functions
-    /************************************************************************************************/
 
-
+    async setUserTranslations(configuration: any): Promise<void> {
+        if (configuration?.Cards?.length > 0) {
+            for (let index = 0; index < configuration.Cards.length; index++) {
+                const item = configuration.Cards[index];
+                item.Title = await pepperi.translations.translate({ key: item.Title });
+                item.Description = await pepperi.translations.translate({ key: item.Description });
+            }
+        }
+    }
 }
 export default GalleryCpiService;
