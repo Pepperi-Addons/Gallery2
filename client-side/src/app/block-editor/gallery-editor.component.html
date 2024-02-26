@@ -2,7 +2,7 @@
     <mat-tab label="{{'GALLERY_EDITOR.TABS.GENERAL' | translate}}">
         <div class="page-builder-editor-tab">
             <div>
-                <label class="editor-title">{{'GALLERY_EDITOR.GRID' | translate}}</label>
+                <label class="editor-title">{{'GALLERY_EDITOR.LAYOUT' | translate}}</label>
                 <pep-slider pepResetConfigurationField="GalleryConfig.Gallery.MaxColumns" [hideReset]="configuration?.GalleryConfig?.Gallery?.MaxColumns === configurationSource?.GalleryConfig?.Gallery?.MaxColumns"  
                 [resetHostEvents]="hostEvents"
                         [label]="'GALLERY_EDITOR.MAX_COLUMNS' | translate" 
@@ -126,6 +126,7 @@
                     [renderTitle]="false" (valueChange)="onGalleryFieldChange('Card.UseRoundCorners',$event)">
                 </pep-checkbox>
                 <pep-group-buttons-settings [groupType]="'sizes'"
+                    [subHeader]="'GALLERY_EDITOR.ROUND_CORNER_TITLE' | translate"
                     [disabled]="!configuration?.GalleryConfig?.Card?.UseRoundCorners" 
                     [btnKey]="configuration?.GalleryConfig?.Card?.RoundCornersSize" [excludeKeys]="['xs','2xl']"
                     (btnkeyChange)="onGalleryFieldChange('Card.RoundCornersSize',$event)">
@@ -164,7 +165,7 @@
 
     <mat-tab cdkDropListGroup label="{{'GALLERY_EDITOR.TABS.CONTENT' | translate}}">
         <div class="page-builder-editor-tab">
-            <label class="editor-title">{{'IMAGE_EDITOR.TAB_TITLE' | translate}}</label>
+            <!-- <label class="editor-title">{{'IMAGE_EDITOR.TAB_TITLE' | translate}}</label> -->
             <div (cdkDropListDropped)="drop($event)" cdkDropList class="available-items">
                 <card-editor *ngFor="let currentCard of configuration?.Cards;"  (flowChange)='onCardFlowChanged($event);'
                     [id]="currentCard?.id" [selectedCardIndex]="selectedCardindex" [showActions]="true" (hostEvents)='onHostObjectChange($event)'

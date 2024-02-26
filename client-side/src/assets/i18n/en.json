@@ -18,6 +18,7 @@
         "INNER_SPACING": "Inner spacing",
         "AWESOMETEXTFORTHE": "Awesome Text For The",
         "GRID": "Grid",
+        "LAYOUT": "Layout",
         "MAX_COLUMNS": "Max Columns",
         "GAP_SUBHEADER": "Gap size between Gallery items",
         "GAP_HEADER": "Gaps",
@@ -60,13 +61,12 @@
             "OVERLAID": "Overlaid",
             "SEPARATED": "Separated"
         },
-
         "GROUP": {
             "GROUPED": "Grouped",
             "UNGROUPED": "Ungrouped"
         },
-        
-        "ROUND_CORNER": "Round corner"
+        "ROUND_CORNER": "Round corner",
+        "ROUND_CORNER_TITLE": "Add round corner"
     },
 
     "IMAGE_EDITOR": {
